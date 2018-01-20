@@ -120,4 +120,10 @@ gulp.task('watch', ['build'], function () {
 	gulp.watch('src/images/**/*', ['images'])
 });
 
+process.on('uncaughtException', function(err) {
+  console.log(err);
+  connect.serverClose();
+  process.kill();
+});
+
 gulp.task('default', ['html', 'js', 'less', 'images' ,'connect', 'watch'])

@@ -1,8 +1,4 @@
 /* Getting Started Page */
-html, body {
-	height: 100%;
-}
-
 .start-box {
 	padding: 1em;
 	filter: blur(0);
@@ -28,26 +24,29 @@ html, body {
 	//box-shadow:
 }
 
+.card-icon {
+	color: #CD2E3A;
+	margin-bottom: 0.5em;
+}
+
 /* Footer */
 
-footer {
-	height: 100px;
+.site-footer {
+	padding: 10px 0;
 	text-align: center;
 }
 
-.page-wrap {
-	min-height: 100%;
-	margin-bottom: -100px;
+.wrapper-footer {
+	border-top: 1px solid #ddd;
+	background-color: $lightGray;
 }
 
-.page-wrap::after {
-	display: block;
+.Site {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
-.site-footer, .page-wrap::after {
-	height:100px;
-}
-
-.card-icon {
-	margin-bottom: 1em;
+.Site-content {
+  flex: 1;
 }

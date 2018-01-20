@@ -19,11 +19,6 @@ function setupNavBar() {
 	}
 }
 
-function setFooterHeight() {
-	document.getElementById('mysitefooter').style.height = '100px';
-}
-
 document.addEventListener('DOMContentLoaded', () => {
 	setupNavBar();
-	setFooterHeight();
 });

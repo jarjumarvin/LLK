@@ -5,15 +5,13 @@
     <% title = site_title + " - " + page_title; %>
         <%- include partials/head %>
 
-            <body class="Site">
+            <body>
                 <%- include partials/navbar %>
-                    <section class="hero is-info site-content page-wrap">
+                    <section class="hero is-info is- root">
                         <div class="hero-body">
-                            <div class="container">
-                                <h1 class="title is-1">
-                                    <span id="hero-title">
+                            <div class="container site-content">
+                                <h1 class="page-title title is-1">
                                         <%= page_title %>
-                                    </span>
                                 </h1>
                                 <div class="columns" id="get-started">
                                     <div class="column is-one-third">
@@ -77,11 +75,11 @@
                                 </div>
                             </div>
                         </div>
+
                     </section>
-                    <div id="mysitefooter" class="site-footer">
-                        <%- include partials/footer %>
-                    </div>
-                    <script src="js/script.min.js"></script>
+                    <%- include partials/footer %>
+
+                        <script src="js/script.min.js"></script>
             </body>
 
 </html>
