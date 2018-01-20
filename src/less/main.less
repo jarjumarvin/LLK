@@ -1,0 +1,53 @@
+/* Getting Started Page */
+html, body {
+	height: 100%;
+}
+
+.start-box {
+	padding: 1em;
+	filter: blur(0);
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+	//transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.start-box .subtitle {
+	color: #4a4a4a !important;
+}
+
+.start-box .icon {
+	justify-content: inherit;
+	align-items: inherit;
+}
+
+.start-box:hover {
+	cursor: pointer;
+	//transform: scale(1.05);
+	//box-shadow: 0px 7px 15px rgba(0,0,0,0.3);
+	box-shadow: 0 12px 24px rgba(0,0,0,0.20), 0 10px 10px rgba(0,0,0,0.22);
+	//box-shadow:
+}
+
+/* Footer */
+
+footer {
+	height: 100px;
+	text-align: center;
+}
+
+.page-wrap {
+	min-height: 100%;
+	margin-bottom: -100px;
+}
+
+.page-wrap::after {
+	display: block;
+}
+
+.site-footer, .page-wrap::after {
+	height:100px;
+}
+
+.card-icon {
+	margin-bottom: 1em;
+}
