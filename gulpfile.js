@@ -16,14 +16,19 @@ const mqpacker = require('css-mqpacker');
 const cssnano = require('cssnano');
 const ghpages = require('gh-pages');
 const del = require('del');
+const reload = require('require-reload')(require);
+const runSequence = require('run-sequence');
+
+let content = reload('./src/content/content.json');
 
 // Clean HTML
-gulp.task('html', function (cb) {
-
+gulp.task('html', function(cb) {
 	pump([
 		gulp.src('src/*.ejs'),
 		ejs({
-			site_title: 'Let\'s Learn Korean'
+			site_title: 'Let\'s Learn Korean',
+			content: content['content'],
+			navbar: content['navbar']
 		}, {}, {
 			ext: '.html'
 		}),
@@ -33,8 +38,12 @@ gulp.task('html', function (cb) {
 	], cb);
 });
 
+gulp.task('reload', function(cb) {
+	content = reload('./src/content/content.json');
+});
+
 // Run task js, only if verify is successful
-gulp.task('js', ['verify'], function (cb) {
+gulp.task('js', ['verify'], function(cb) {
 	pump([
 		gulp.src(['src/js/**/*.js', '!src/lib/**/*']),
 		concat('script.js'),
@@ -51,7 +60,7 @@ gulp.task('js', ['verify'], function (cb) {
 });
 
 // Lints the js files
-gulp.task('verify', function (cb) {
+gulp.task('verify', function(cb) {
 	pump([
 		gulp.src(['src/js/**/*.js', '!src/lib/**/*']),
 		eslint(),
@@ -61,13 +70,13 @@ gulp.task('verify', function (cb) {
 });
 
 gulp.task('clean', function(cb) {
-		return del([
-			'dist/**/*'
-		]);
+	return del([
+		'dist/**/*'
+	]);
 });
 
 // Copies images to build
-gulp.task('images', function (cb) {
+gulp.task('images', function(cb) {
 	pump([
 		gulp.src(['src/images/**/*']),
 		gulp.dest('dist/images'),
@@ -76,7 +85,7 @@ gulp.task('images', function (cb) {
 });
 
 // Do a bunch of stuff to CSS files
-gulp.task('less', function (cb) {
+gulp.task('less', function(cb) {
 	pump([
 		gulp.src('src/less/**/*.less'),
 		less(),
@@ -97,33 +106,34 @@ gulp.task('less', function (cb) {
 	], cb);
 });
 
-gulp.task('deploy', ['build'], function (cb) {
+gulp.task('deploy', ['build'], function(cb) {
 	ghpages.publish('dist', cb);
 });
 
 gulp.task('connect', function() {
-  connect.server({
-    root: 'dist',
-	port: 8090,
-	livereload: true
-  })
+	connect.server({
+		root: 'dist',
+		port: 8090,
+		livereload: true
+	})
 });
 
-gulp.task('build', ['js', 'less', 'html', 'images']);
+gulp.task('build', ['reload', 'js', 'less', 'html', 'images']);
 
-gulp.task('watch', ['build'], function () {
+gulp.task('watch', ['build'], function() {
 	livereload()
 	gulp.watch('src/js/**/*.js', ['js'])
 	gulp.watch('src/less/**/*.less', ['less'])
 	gulp.watch('src/**/*.ejs', ['html'])
 	gulp.watch('src/lib/**/*', ['lib'])
+	gulp.watch('src/content/content.json', ['reload'])
 	gulp.watch('src/images/**/*', ['images'])
 });
 
 process.on('uncaughtException', function(err) {
-  console.log(err);
-  connect.serverClose();
-  process.kill();
+	console.log(err);
+	connect.serverClose();
+	process.kill();
 });
 
-gulp.task('default', ['html', 'js', 'less', 'images' ,'connect', 'watch'])
+gulp.task('default', ['reload', 'html', 'js', 'less', 'images', 'connect', 'watch'])

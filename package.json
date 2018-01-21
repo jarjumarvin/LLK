@@ -44,6 +44,8 @@
     "gulp-postcss": "^7.0.1",
     "gulp-rename": "^1.2.2",
     "gulp-webserver": "^0.9.1",
-    "pump": "^2.0.0"
+    "pump": "^2.0.0",
+    "require-reload": "^0.2.2",
+    "run-sequence": "^2.2.1"
   }
 }

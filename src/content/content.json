@@ -1,0 +1,95 @@
+{
+    "navbar": [{
+            "type": "link",
+            "title": "한국인이세요?",
+            "goto": ""
+        },
+        {
+            "type": "category",
+            "title": "Discord",
+            "contains": [{
+                    "title": "Rules & Roles",
+                    "goto": "discord-rules-roles"
+                },
+                {
+                    "title": "Rules & Roles",
+                    "goto": "discord-channels-activities"
+                },
+                {
+                    "title": "Placement Test",
+                    "goto": "discord-placement-test"
+                }
+            ]
+        },
+        {
+            "type": "category",
+            "title": "Classroom",
+            "contains": [{
+                    "title": "Beginner",
+                    "goto": "learner-beginner"
+                },
+                {
+                    "title": "Intermediate",
+                    "goto": "learner-intermediate"
+                },
+                {
+                    "title": "Advanced",
+                    "goto": "learner-advanced"
+                }
+            ]
+        },
+        {
+            "type": "category",
+            "title": "Resources",
+            "contains": [{
+                    "title": "한글 / Hangul",
+                    "goto": "resources-hangul"
+                },
+                {
+                    "title": "문법 / Grammar",
+                    "goto": "resources-grammar"
+                },
+                {
+                    "title": "언어 / Vocabulary",
+                    "goto": "resources-vocabulary"
+                },
+                {
+                    "title": "Media",
+                    "goto": "resources-media"
+                }
+            ]
+        },
+        {
+            "type": "category",
+            "title": "사전 / Dictionary",
+            "contains": [{
+                    "title": "Naver kordic",
+                    "external": "true",
+                    "goto": "dictionary-kordic"
+
+                },
+                {
+                    "title": "Naver endic",
+                    "external": "true",
+                    "goto": "dictionary-endic"
+                },
+                {
+                    "title": "Naver Hanja",
+                    "external": "true",
+                    "goto": "dictionary-hanja"
+                },
+                {
+                    "title": "Daum Dictionary",
+                    "external": "true",
+                    "goto": "dictionary-daum"
+                }
+            ]
+        },
+        {
+            "type": "link",
+            "title": "FAQ",
+            "goto": "faq"
+        }
+    ],
+    "content": []
+}
