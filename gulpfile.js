@@ -106,11 +106,10 @@ gulp.task('less', function() {
 
 // Publish to ghpages branch
 gulp.task('deploy', function() {
-	runSequence('clean', 'build', 'clean-html', function() {
-		gulp.src('./dist/**/*')
-			.pipe(ghpages());
-	})
+	gulp.src('./dist/**/*')
+		.pipe(ghpages());
 });
+
 // Open local Server
 gulp.task('connect', function() {
 	connect.server({
