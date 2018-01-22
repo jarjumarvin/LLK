@@ -2,7 +2,7 @@ We have a few rules and guidelines in place to promote a respectful learning env
 
 If you're just here to see the different roles available on the discord click [here](https://jarjumarvin.github.io/LLK/discord-rules-roles.html#roles).
 
-## Rules
+# Rules
 
 * Treat each other with respect!
 
@@ -18,7 +18,7 @@ If you're just here to see the different roles available on the discord click [h
 
 * Listen to staff members, if they tell you to stop, do stop. If you believe you have been treated unfairly, you may appeal to an Admin.
 
-## Guidelines
+# Guidelines
 
 * Use your common sense. We don't want to start writing paragraphs here, so we wont list everything in the rules. If you cause problems on the server you may get banned even if you "didnt break any rules"
 
