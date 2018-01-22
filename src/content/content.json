@@ -2,7 +2,7 @@
   "navbar": [{
       "type": "link",
       "title": "한국인이세요?",
-      "goto": ""
+      "goto": "korean"
     },
     {
       "type": "category",
@@ -140,6 +140,9 @@
       }
     ],
     "pages": {
+      "korean": {
+        "title": "한국인이세요?"
+      },
       "discord-channels-activities": {
         "title": "Discord Channels and Activities"
       },
