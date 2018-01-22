@@ -42,7 +42,9 @@ gulp.task('html', function() {
 // Markdown Files
 gulp.task('md', function() {
 	return gulp.src('src/content/**/*.md')
-		.pipe(marked())
+		.pipe(marked({
+			breaks: true
+		}))
 		.pipe(ejs({
 			site_title: 'LLK',
 			page_title: 'PAGE_TITLE'
@@ -145,7 +147,7 @@ gulp.task('deploy', function(cb) {
 gulp.task('connect', function() {
 	return connect.server({
 		root: 'dist',
-		port: 8080,
+		port: 8090,
 		livereload: true
 	})
 });
