@@ -106,8 +106,8 @@ gulp.task('less', function() {
 
 // Publish to ghpages branch
 gulp.task('deploy', function() {
-	gulp.src('./dist/**/*')
-		.pipe(ghpages());
+	return gulp.src('./dist/**/*')
+		.pipe(ghpages())
 });
 
 // Open local Server
