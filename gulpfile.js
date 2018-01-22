@@ -15,7 +15,7 @@ const webserver = require('gulp-webserver');
 const autoprefixer = require('autoprefixer');
 const mqpacker = require('css-mqpacker');
 const cssnano = require('cssnano');
-const ghpages = require('gh-pages');
+const ghpages = require('gulp-gh-pages');
 const del = require('del');
 const reload = require('require-reload')(require);
 const runSequence = require('run-sequence');
@@ -106,9 +106,9 @@ gulp.task('less', function() {
 
 // Publish to ghpages branch
 gulp.task('deploy', ['build'], function() {
-	ghpages.publish('dist', cb);
+	return gulp.src('./dist/**/*')
+		.pipe(ghpages());
 });
-
 // Open local Server
 gulp.task('connect', function() {
 	connect.server({
