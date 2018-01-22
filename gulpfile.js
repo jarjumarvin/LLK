@@ -106,8 +106,10 @@ gulp.task('less', function() {
 
 // Publish to ghpages branch
 gulp.task('deploy', function() {
-	return gulp.src('./dist/**/*')
-		.pipe(ghpages());
+	runSequence('clean', 'build', 'clean-html', function() {
+		gulp.src('./dist/**/*')
+			.pipe(ghpages());
+	})
 });
 // Open local Server
 gulp.task('connect', function() {
@@ -116,6 +118,10 @@ gulp.task('connect', function() {
 		port: 8080,
 		livereload: true
 	})
+});
+
+gulp.task('prod', function() {
+	runSequence('clean', 'build', 'clean-html');
 });
 
 // Build everything
