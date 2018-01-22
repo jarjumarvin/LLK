@@ -69,23 +69,23 @@
       "contains": [{
           "title": "Naver kordic",
           "external": "true",
-          "goto": "dictionary-kordic"
+          "goto": "http://dic.naver.com/"
 
         },
         {
           "title": "Naver endic",
           "external": "true",
-          "goto": "dictionary-endic"
+          "goto": "http://endic.naver.com/"
         },
         {
           "title": "Naver Hanja",
           "external": "true",
-          "goto": "dictionary-hanja"
+          "goto": "http://hanja.naver.com/"
         },
         {
-          "title": "Daum Dictionary",
+          "title": "KRDict",
           "external": "true",
-          "goto": "dictionary-daum"
+          "goto": "https://krdict.korean.go.kr/"
         }
       ]
     },
