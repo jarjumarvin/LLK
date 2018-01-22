@@ -47,7 +47,7 @@ gulp.task('clean-html', function() {
 // reload the content file and update cards / header
 gulp.task('reload', function() {
 	content = reload('./src/content/content.json');
-	runSequence(['html'])
+	return runSequence(['html'])
 });
 
 // Run task js, only if verify is successful
@@ -74,7 +74,7 @@ gulp.task('verify', function() {
 
 //clean the dist folder for git
 gulp.task('clean', function() {
-	del([
+	return del([
 		'dist/**/*'
 	]);
 });
@@ -104,15 +104,17 @@ gulp.task('less', function() {
 		.pipe(gulp.dest('dist/css'))
 });
 
-// Publish to ghpages branch
-gulp.task('deploy', function() {
-	return gulp.src('./dist/**/*')
-		.pipe(ghpages())
-});
+// deploy
+gulp.task('deploy', function(cb) {
+	runSequence('build', function(cb) {
+		gulp.src('./dist/**/*')
+			.pipe(ghpages(cb));
+	})
+})
 
 // Open local Server
 gulp.task('connect', function() {
-	connect.server({
+	return connect.server({
 		root: 'dist',
 		port: 8080,
 		livereload: true
@@ -124,8 +126,8 @@ gulp.task('prod', function() {
 });
 
 // Build everything
-gulp.task('build', function() {
-	runSequence(['js', 'less', 'reload', 'images'], 'clean-html');
+gulp.task('build', function(cb) {
+	runSequence('clean', 'js', 'less', 'reload', 'images', 'clean-html', cb)
 });
 
 // Watch for Filechanges
