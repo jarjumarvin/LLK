@@ -1,95 +1,143 @@
 {
-    "navbar": [{
-            "type": "link",
-            "title": "한국인이세요?",
-            "goto": ""
+  "navbar": [{
+      "type": "link",
+      "title": "한국인이세요?",
+      "goto": ""
+    },
+    {
+      "type": "category",
+      "title": "Discord",
+      "contains": [{
+          "title": "Rules & Roles",
+          "goto": "discord-rules-roles"
         },
         {
-            "type": "category",
-            "title": "Discord",
-            "contains": [{
-                    "title": "Rules & Roles",
-                    "goto": "discord-rules-roles"
-                },
-                {
-                    "title": "Rules & Roles",
-                    "goto": "discord-channels-activities"
-                },
-                {
-                    "title": "Placement Test",
-                    "goto": "discord-placement-test"
-                }
-            ]
+          "title": "Channels & Activities",
+          "goto": "discord-channels-activities"
         },
         {
-            "type": "category",
-            "title": "Classroom",
-            "contains": [{
-                    "title": "Beginner",
-                    "goto": "learner-beginner"
-                },
-                {
-                    "title": "Intermediate",
-                    "goto": "learner-intermediate"
-                },
-                {
-                    "title": "Advanced",
-                    "goto": "learner-advanced"
-                }
-            ]
-        },
-        {
-            "type": "category",
-            "title": "Resources",
-            "contains": [{
-                    "title": "한글 / Hangul",
-                    "goto": "resources-hangul"
-                },
-                {
-                    "title": "문법 / Grammar",
-                    "goto": "resources-grammar"
-                },
-                {
-                    "title": "언어 / Vocabulary",
-                    "goto": "resources-vocabulary"
-                },
-                {
-                    "title": "Media",
-                    "goto": "resources-media"
-                }
-            ]
-        },
-        {
-            "type": "category",
-            "title": "사전 / Dictionary",
-            "contains": [{
-                    "title": "Naver kordic",
-                    "external": "true",
-                    "goto": "dictionary-kordic"
-
-                },
-                {
-                    "title": "Naver endic",
-                    "external": "true",
-                    "goto": "dictionary-endic"
-                },
-                {
-                    "title": "Naver Hanja",
-                    "external": "true",
-                    "goto": "dictionary-hanja"
-                },
-                {
-                    "title": "Daum Dictionary",
-                    "external": "true",
-                    "goto": "dictionary-daum"
-                }
-            ]
-        },
-        {
-            "type": "link",
-            "title": "FAQ",
-            "goto": "faq"
+          "title": "Placement Test",
+          "goto": "discord-placement-test"
         }
-    ],
-    "content": []
+      ]
+    },
+    {
+      "type": "category",
+      "title": "Classroom",
+      "contains": [{
+          "title": "Novice",
+          "goto": "learner-novice"
+        },
+        {
+          "title": "Beginner",
+          "goto": "learner-beginner"
+        },
+        {
+          "title": "Intermediate",
+          "goto": "learner-intermediate"
+        },
+        {
+          "title": "Advanced",
+          "goto": "learner-advanced"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "title": "Resources",
+      "contains": [{
+          "title": "한글 / Hangul",
+          "goto": "resources-hangul"
+        },
+        {
+          "title": "문법 / Grammar",
+          "goto": "resources-grammar"
+        },
+        {
+          "title": "언어 / Vocabulary",
+          "goto": "resources-vocabulary"
+        },
+        {
+          "title": "Media",
+          "goto": "resources-media"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "title": "사전 / Dictionary",
+      "contains": [{
+          "title": "Naver kordic",
+          "external": "true",
+          "goto": "dictionary-kordic"
+
+        },
+        {
+          "title": "Naver endic",
+          "external": "true",
+          "goto": "dictionary-endic"
+        },
+        {
+          "title": "Naver Hanja",
+          "external": "true",
+          "goto": "dictionary-hanja"
+        },
+        {
+          "title": "Daum Dictionary",
+          "external": "true",
+          "goto": "dictionary-daum"
+        }
+      ]
+    },
+    {
+      "type": "link",
+      "title": "FAQ",
+      "goto": "faq"
+    }
+  ],
+  "content": {
+    "cards": [{
+        "id": "rulesroles",
+        "goto": "discord-rules-roles",
+        "title": "Rules & Roles",
+        "icon": "fas fa-info",
+        "description": "The rules and roles of the LLK server."
+      },
+      {
+        "id": "discord",
+        "goto": "discord-channels-activities",
+        "title": "Discord",
+        "icon": "fa fab fa-discord",
+        "description": "The channels and actvities of our Discord."
+      },
+      {
+        "id": "novice",
+        "goto": "learner-novice",
+        "title": "Novice",
+        "icon": "fas fa-question",
+        "description": "I dont know ANY Korean."
+      },
+      {
+        "id": "beginner",
+        "goto": "learner-beginner",
+        "title": "Beginner",
+        "icon": "fas fa-pencil-alt",
+        "description": "I know how to read, maybe some basic grammar and words."
+      },
+      {
+        "id": "intermediate",
+        "goto": "learner-intermediate",
+        "title": "Intermediate",
+        "icon": "fas fa-book",
+        "description": "I know a decent amount of grammar and vocabulary and want to learn more."
+      },
+      {
+        "title": "advanced",
+        "goto": "learner-advanced",
+        "title": "Advanced",
+        "icon": "fas fa-graduation-cap",
+        "description": "I know a lot of Korean and want improve in a particular area."
+      }
+    ]
+  }
 }

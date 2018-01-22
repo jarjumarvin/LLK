@@ -19,6 +19,17 @@ function setupNavBar() {
 	}
 }
 
+function setDataLinks() {
+	const dataLink = document.querySelectorAll('[data-link]');
+	// onclick go to the datalink
+	dataLink.forEach((element) => {
+		element.addEventListener('click', () => {
+			document.location = element.dataset.link;
+		});
+	});
+}
+
 document.addEventListener('DOMContentLoaded', () => {
 	setupNavBar();
+	setDataLinks();
 });

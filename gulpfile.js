@@ -2,6 +2,7 @@ const gulp = require('gulp');
 const pump = require('pump');
 const htmlclean = require('gulp-htmlclean');
 const ejs = require('gulp-ejs');
+const watch = require('gulp-watch');
 const eslint = require('gulp-eslint');
 const rename = require('gulp-rename');
 const concat = require('gulp-concat');
@@ -22,112 +23,114 @@ const runSequence = require('run-sequence');
 let content = reload('./src/content/content.json');
 
 // Clean HTML
-gulp.task('html', function(cb) {
-	pump([
-		gulp.src('src/*.ejs'),
-		ejs({
+gulp.task('html', function() {
+	return gulp.src('src/*.ejs')
+		.pipe(ejs({
 			site_title: 'Let\'s Learn Korean',
 			content: content['content'],
 			navbar: content['navbar']
 		}, {}, {
 			ext: '.html'
-		}),
-		htmlclean(),
-		gulp.dest('dist/'),
-		livereload()
-	], cb);
+		}))
+		.pipe(htmlclean())
+		.pipe(gulp.dest('dist/'))
 });
 
-gulp.task('reload', function(cb) {
+// Remove useless html files
+gulp.task('clean-html', function() {
+	return del([
+		'dist/**/template.html',
+		'dist/**/blank.html'
+	])
+});
+
+// reload the content file and update cards / header
+gulp.task('reload', function() {
 	content = reload('./src/content/content.json');
+	runSequence(['html'])
 });
 
 // Run task js, only if verify is successful
-gulp.task('js', ['verify'], function(cb) {
-	pump([
-		gulp.src(['src/js/**/*.js', '!src/lib/**/*']),
-		concat('script.js'),
-		gulp.dest('dist/js'),
-		minify({
+gulp.task('js', ['verify'], function() {
+	return gulp.src(['src/js/**/*.js', '!src/lib/**/*'])
+		.pipe(concat('script.js'))
+		.pipe(gulp.dest('dist/js'))
+		.pipe(minify({
 			ext: {
 				min: '.min.js'
 			},
 			noSource: true
-		}),
-		gulp.dest('dist/js'),
-		livereload()
-	], cb);
+		}))
+		.pipe(gulp.dest('dist/js'))
 });
 
 // Lints the js files
-gulp.task('verify', function(cb) {
-	pump([
-		gulp.src(['src/js/**/*.js', '!src/lib/**/*']),
-		eslint(),
-		eslint.format(),
-		eslint.failAfterError()
-	], cb);
+gulp.task('verify', function() {
+	return gulp.src(['src/js/**/*.js', '!src/lib/**/*'])
+		.pipe(eslint())
+		.pipe(eslint.format())
+		.pipe(eslint.failAfterError())
 });
 
-gulp.task('clean', function(cb) {
-	return del([
+//clean the dist folder for git
+gulp.task('clean', function() {
+	del([
 		'dist/**/*'
 	]);
 });
 
 // Copies images to build
-gulp.task('images', function(cb) {
-	pump([
-		gulp.src(['src/images/**/*']),
-		gulp.dest('dist/images'),
-		livereload()
-	], cb);
+gulp.task('images', function() {
+	return gulp.src(['src/images/**/*'])
+		.pipe(gulp.dest('dist/images'))
 });
 
 // Do a bunch of stuff to CSS files
-gulp.task('less', function(cb) {
-	pump([
-		gulp.src('src/less/**/*.less'),
-		less(),
-		postcss([
+gulp.task('less', function() {
+	return gulp.src('src/less/**/*.less')
+		.pipe(less())
+		.pipe(postcss([
 			autoprefixer({
 				browsers: ['last 2 versions', '> 2%']
 			}),
 			mqpacker
-		]),
-		rename('style.css'),
-		gulp.dest('dist/css'),
-		postcss([
+		]))
+		.pipe(rename('style.css'))
+		.pipe(gulp.dest('dist/css'))
+		.pipe(postcss([
 			cssnano
-		]),
-		rename('style.min.css'),
-		gulp.dest('dist/css'),
-		livereload()
-	], cb);
+		]))
+		.pipe(rename('style.min.css'))
+		.pipe(gulp.dest('dist/css'))
 });
 
-gulp.task('deploy', ['build'], function(cb) {
+// Publish to ghpages branch
+gulp.task('deploy', ['build'], function() {
 	ghpages.publish('dist', cb);
 });
 
+// Open local Server
 gulp.task('connect', function() {
 	connect.server({
 		root: 'dist',
-		port: 8090,
+		port: 8080,
 		livereload: true
 	})
 });
 
-gulp.task('build', ['reload', 'js', 'less', 'html', 'images']);
+// Build everything
+gulp.task('build', function() {
+	runSequence(['js', 'less', 'reload', 'images'], 'clean-html');
+});
 
-gulp.task('watch', ['build'], function() {
-	livereload()
-	gulp.watch('src/js/**/*.js', ['js'])
-	gulp.watch('src/less/**/*.less', ['less'])
-	gulp.watch('src/**/*.ejs', ['html'])
-	gulp.watch('src/lib/**/*', ['lib'])
-	gulp.watch('src/content/content.json', ['reload'])
-	gulp.watch('src/images/**/*', ['images'])
+// Watch for Filechanges
+gulp.task('watch', function() {
+	gulp.watch('src/js/**/*.js', ['js']);
+	gulp.watch('src/less/**/*.less', ['less']);
+	gulp.watch('src/**/*.ejs', ['html']);
+	//gulp.watch('src/content/**/*.md', ['md']);
+	gulp.watch('src/content/content.json', ['reload']);
+	gulp.watch('src/images/**/*', ['images']);
 });
 
 process.on('uncaughtException', function(err) {
@@ -136,4 +139,6 @@ process.on('uncaughtException', function(err) {
 	process.kill();
 });
 
-gulp.task('default', ['reload', 'html', 'js', 'less', 'images', 'connect', 'watch'])
+gulp.task('default', function() {
+	runSequence(['build', 'connect'], ['watch']);
+});
