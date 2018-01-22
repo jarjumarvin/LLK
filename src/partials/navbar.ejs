@@ -18,7 +18,7 @@
                         <a class="navbar-link">
                             <%- navbar[item].title %>
                         </a>
-                        <div class="navbar-dropdown is-boxed">
+                        <div class="navbar-dropdown">
                             <% for (var containedIndex in navbar[item]['contains']) { %>
                                 <% var containedItem = navbar[item]['contains'][containedIndex]; %>
                                     <a class="navbar-item" href="<%- ( containedItem.external ? containedItem.goto : (containedItem.goto ? './' + containedItem.goto + '.html' : './')) %>">
