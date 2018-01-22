@@ -19,6 +19,9 @@ const ghpages = require('gulp-gh-pages');
 const del = require('del');
 const reload = require('require-reload')(require);
 const runSequence = require('run-sequence');
+const marked = require('gulp-marked');
+const inject = require('gulp-inject-self');
+const replace = require('gulp-replace');
 
 let content = reload('./src/content/content.json');
 
@@ -26,7 +29,7 @@ let content = reload('./src/content/content.json');
 gulp.task('html', function() {
 	return gulp.src('src/*.ejs')
 		.pipe(ejs({
-			site_title: 'Let\'s Learn Korean',
+			site_title: 'LLK',
 			content: content['content'],
 			navbar: content['navbar']
 		}, {}, {
@@ -35,6 +38,30 @@ gulp.task('html', function() {
 		.pipe(htmlclean())
 		.pipe(gulp.dest('dist/'))
 });
+
+// Markdown Files
+gulp.task('md', function() {
+	return gulp.src('src/content/**/*.md')
+		.pipe(marked())
+		.pipe(ejs({
+			site_title: 'LLK',
+			page_title: 'PAGE_TITLE'
+		}, {}, {
+			ext: '.html'
+		}))
+		.pipe(inject('dist/template.html', /<INJECT>/, {
+			replaceWith: function(fileContent) {
+				return '\n' + fileContent;
+			}
+		}))
+		.pipe(replace('PAGE_TITLE', function() {
+			var name = this.file.relative.replace(/(.*)\.(.*?)$/, "$1");
+			var page_title = (content['content']['pages'][name] ? content['content']['pages'][name].title : "PAGE TITLE");
+			return page_title;
+		}))
+		.pipe(htmlclean())
+		.pipe(gulp.dest('dist/'));
+})
 
 // Remove useless html files
 gulp.task('clean-html', function() {
@@ -47,7 +74,7 @@ gulp.task('clean-html', function() {
 // reload the content file and update cards / header
 gulp.task('reload', function() {
 	content = reload('./src/content/content.json');
-	return runSequence(['html'])
+	return runSequence('html', 'md')
 });
 
 // Run task js, only if verify is successful
@@ -104,12 +131,14 @@ gulp.task('less', function() {
 		.pipe(gulp.dest('dist/css'))
 });
 
+gulp.task('ghpages', function(cb) {
+	return gulp.src('./dist/**/*')
+		.pipe(ghpages(cb));
+})
+
 // deploy
 gulp.task('deploy', function(cb) {
-	runSequence('build', function(cb) {
-		gulp.src('./dist/**/*')
-			.pipe(ghpages(cb));
-	})
+	runSequence('prod', 'ghpages', cb)
 })
 
 // Open local Server
@@ -121,13 +150,13 @@ gulp.task('connect', function() {
 	})
 });
 
-gulp.task('prod', function() {
-	runSequence('clean', 'build', 'clean-html');
+gulp.task('prod', function(cb) {
+	runSequence('clean', 'build', 'clean-html', cb);
 });
 
 // Build everything
 gulp.task('build', function(cb) {
-	runSequence('clean', 'js', 'less', 'reload', 'images', 'clean-html', cb)
+	runSequence('js', 'less', 'reload', 'html', 'md', 'images', cb)
 });
 
 // Watch for Filechanges
@@ -135,7 +164,7 @@ gulp.task('watch', function() {
 	gulp.watch('src/js/**/*.js', ['js']);
 	gulp.watch('src/less/**/*.less', ['less']);
 	gulp.watch('src/**/*.ejs', ['html']);
-	//gulp.watch('src/content/**/*.md', ['md']);
+	gulp.watch('src/content/**/*.md', ['md']);
 	gulp.watch('src/content/content.json', ['reload']);
 	gulp.watch('src/images/**/*', ['images']);
 });
@@ -146,6 +175,6 @@ process.on('uncaughtException', function(err) {
 	process.kill();
 });
 
-gulp.task('default', function() {
-	runSequence(['build', 'connect'], ['watch']);
+gulp.task('default', function(cb) {
+	runSequence('clean', ['build', 'connect'], ['watch'], cb);
 });
