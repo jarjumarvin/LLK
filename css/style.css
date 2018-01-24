@@ -1,0 +1,149 @@
+/* Getting Started Page */
+.start-box {
+  padding: 1em;
+  -webkit-filter: blur(0);
+          filter: blur(0);
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  -webkit-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.start-box .subtitle {
+  color: #4a4a4a !important;
+}
+.start-box .icon {
+  -webkit-box-pack: inherit;
+      -ms-flex-pack: inherit;
+          justify-content: inherit;
+  -webkit-box-align: inherit;
+      -ms-flex-align: inherit;
+          align-items: inherit;
+}
+.start-box:hover {
+  cursor: pointer;
+  -webkit-box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2), 0 10px 10px rgba(0, 0, 0, 0.22);
+          box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+.card-icon {
+  color: #CD2E3A;
+  margin-bottom: 0.5em;
+}
+/* Footer */
+.site-footer {
+  padding: 10px 0;
+  text-align: center;
+}
+.wrapper-footer {
+  border-top: 1px solid #ddd;
+  background-color: $lightGray;
+}
+.Site {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  min-height: 100vh;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.Site-content {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+/* BASE RULES */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $helveticaNeue;
+  color: $darkerGray;
+  font-weight: bold;
+  line-height: 1.7;
+  margin: 1em 0 15px;
+  padding: 0;
+}
+@include mobile {
+  line-height: 1.4;
+}
+h1 {
+  font-size: 1.75em;
+}
+h1 a {
+  color: inherit;
+}
+h2 {
+  font-size: 1.4em;
+}
+h2 a {
+  color: inherit;
+}
+h3 {
+  font-size: 1.25em;
+}
+h4 {
+  font-size: 1.1em;
+  color: $gray;
+}
+p {
+  margin: 15px 0;
+}
+a {
+  color: $blue;
+  text-decoration: none;
+  cursor: pointer;
+}
+a:hover,
+a:active {
+  color: $blue;
+}
+.site-links a {
+  color: #333;
+}
+.md-content ul,
+.md-content ol {
+  margin: 15px 0;
+  padding-left: 30px;
+}
+ul {
+  list-style-type: disc;
+}
+ol {
+  list-style-type: decimal;
+}
+ol ul,
+ul ol,
+ul ul,
+ol ol {
+  margin: 0;
+}
+ul ul,
+ol ul {
+  list-style-type: circle;
+}
+em,
+i {
+  font-style: italic;
+}
+strong,
+b {
+  font-weight: bold;
+}
+img {
+  max-width: 100%;
+}
+.site-title {
+  font-size: 3em !important;
+  font-family: $helveticaNeue;
+  color: $darkerGray;
+  font-weight: bold;
+  line-height: 1.7;
+  margin: 1em 0 15px;
+  padding: 0;
+}
+@include mobile {
+  line-height: 1.4;
+}
