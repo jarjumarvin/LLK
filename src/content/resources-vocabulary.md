@@ -1,8 +1,8 @@
 ## Anki Decks
 
-**[5'000 Words Deck](http://talktomeinkorean.com/curriculum/)** - By Evita, edited by @오로로 on Discord, with EN->Kr for each card.
+**[5'000 Words Deck](https://drive.google.com/file/d/0B0tIn6npb6R3QlNGVVJCX1VQN28/view?usp=sharing)** - By Evita, edited by @오로로 on Discord, with EN->Kr for each card.
 
-**[1'800 Hanja](http://talktomeinkorean.com/curriculum/)** - List of the chinese characters Korean school children in middle and high school along with the pronunciation and meaning (all in Korean) and some other examples of use.
+**[1'800 Hanja](https://ankiweb.net/shared/info/1789012176)** - List of the chinese characters Korean school children in middle and high school along with the pronunciation and meaning (all in Korean) and some other examples of use.
 
 ## Topikguide.com Vocabulary Lists
 
